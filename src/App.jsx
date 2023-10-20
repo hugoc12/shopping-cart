@@ -1,11 +1,22 @@
-import { useState } from 'react'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Home from './pages/Home';
+import Carrinho from './pages/Carrinho';
+import ContextHome from './services/contextHome';
 
 function App() {
+  const browser = createBrowserRouter([
+    {
+      path:'/',
+      element:<ContextHome><Home/></ContextHome>
+    },
+    {
+      path:'/carrinho',
+      element:<Carrinho/>
+    }
+  ])
 
   return (
-    <>
-      <h1>Olá Vite</h1>
-    </>
+    <RouterProvider router={browser}/>
   )
 }
 

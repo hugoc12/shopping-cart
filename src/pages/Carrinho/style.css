@@ -1,0 +1,22 @@
+:root {
+    --whiteColor: #F8F5E4;
+    --orangeColor: #F97300;
+    --blueColor: #0E3047;
+    --blueColor2: #10828C;
+}
+
+#navBarHome{
+    background-color: var(--blueColor2) !important;
+}
+
+#navBarHome a{
+    color: var(--blueColor) !important;
+}
+
+#navBarHome a:hover{
+    color: var(--whiteColor) !important;
+}
+
+#navBarHome .linkActive{
+    color: var(--whiteColor) !important;
+}

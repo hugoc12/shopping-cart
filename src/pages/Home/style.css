@@ -1,0 +1,47 @@
+:root {
+    --whiteColor: #F8F5E4;
+    --orangeColor: #F97300;
+    --blueColor: #0E3047;
+    --blueColor2: #10828C;
+}
+
+#navBarHome{
+    background-color: var(--blueColor2) !important;
+}
+
+#navBarHome a{
+    color: var(--blueColor) !important;
+}
+
+#navBarHome a:hover{
+    color: var(--whiteColor) !important;
+}
+
+#navBarHome .linkActive{
+    color: var(--whiteColor) !important;
+}
+
+img[alt='iconCart']{
+    width: 28px;
+    cursor: pointer;
+}
+
+.bttCart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 56px;
+}
+
+.qtdeCart{
+    background-color: var(--orangeColor);
+    color: var(--whiteColor);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
