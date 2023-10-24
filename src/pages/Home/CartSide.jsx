@@ -13,6 +13,7 @@ function CartSide(props) {
     const contextGlobal = useContext(GlobalContext);
     const context = useContext(Context)
     const { cart } = contextGlobal;
+    const cartList = Object.entries(cart);
 
     return (
         <Offcanvas show={context.cartSide} onHide={(e) => context.setCartSide(false)} placement='end'>
@@ -20,13 +21,13 @@ function CartSide(props) {
                 <Offcanvas.Title>Carrinho</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                {/*cart.map((el, ind) => {
+                {cartList.map((el, ind) => {
                     return (
-                        <div className='itemCartSide' key={el.id}>
-                            <Image src={el.imgs[0]} alt="item" rounded />
+                        <div className='itemCartSide' key={el[0]}>
+                            <Image src={el[1].imgs[0]} alt="item" rounded />
                             <div>
-                                <h5>{el.name}</h5>
-                                <h6>{CurrencyFormat.format(el.price)}</h6>
+                                <h5>{el[1].name}</h5>
+                                <h6>{CurrencyFormat.format(el[1].price)}</h6>
                                 <div className='qtde'>
                                     <span className='btt'>-</span>
                                     <span>0</span>
@@ -35,7 +36,7 @@ function CartSide(props) {
                             </div>
                         </div>
                     )
-                })*/}
+                })}
             </Offcanvas.Body>
             <div className='footer'>
                 <h4>TOTAL: R$690,90</h4>

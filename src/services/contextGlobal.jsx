@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const GlobalContext = createContext(null);
 
 function ContextGlobal({children}) {
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState({})
 
     return (
         <GlobalContext.Provider value={{

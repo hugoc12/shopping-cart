@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Card, Button, Carousel } from "react-bootstrap";
 import { GlobalContext } from '../../services/contextGlobal';
 import PropTypes from 'prop-types';
@@ -9,17 +9,35 @@ const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
 })
 
 function CardProduct(props) {
+    const [lockAddCart, setLockAddCart] = useState(false);
     const context = useContext(GlobalContext);
     const { dataProduct } = props;
 
+    useEffect(()=>{
+        if(Object.prototype.hasOwnProperty.call(context.cart, dataProduct.id)){
+            setLockAddCart(true);
+        }
+    }, [])
+
     function addCart() {
         let { animeIconCart } = props;
-        let productToCart = Object.assign({
-            qtde:1,
-            total:dataProduct.price
-        }, dataProduct);
-        context.setCart([...context.cart, dataProduct]);
-        animeIconCart.current.restart();
+        if (!Object.prototype.hasOwnProperty.call(context.cart, dataProduct.id)) {
+            let cartCopy = Object.assign({}, context.cart); //CÓPIA DO CARRINHO ATUAL.
+            let productToCart = Object.assign({ //CONSTRUINDO OBJ DO PRODUTO COM AS PROPRIEDADES NECESSÁRIAS PARA O CARRINHO.
+                qtde: 1,
+                total: dataProduct.price
+            }, dataProduct);
+            Object.defineProperty(cartCopy, dataProduct.id, { //DEFINIÇÃO DO PRODUTO NO OBJ CARRINHO USANDO ID COMO REFERÊNCIA.
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: productToCart,
+            }) //ADICIONANDO PRODUTO AO CARRINHO
+            console.log(cartCopy);
+            context.setCart(cartCopy); //DEFININDO STATE CART
+            setLockAddCart(true);
+            animeIconCart.current.restart();
+        }
     }
 
     return (
@@ -38,7 +56,7 @@ function CardProduct(props) {
                 <Card.Text>
                     {CurrencyFormat.format(dataProduct.price)}
                 </Card.Text>
-                <Button variant="primary" onClick={(e) => addCart()}>COMPRAR</Button>
+                <Button variant="primary" onClick={(e) => addCart()} disabled={lockAddCart}>COMPRAR</Button>
             </Card.Body>
         </Card>
     );
