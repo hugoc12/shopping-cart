@@ -1,6 +1,8 @@
 import './style.css';
 import { useContext, useEffect, useRef } from 'react';
 import { Context } from '../../services/contextHome';
+import { GlobalContext } from '../../services/contextGlobal';
+import {useNavigate} from 'react-router-dom';
 
 import iconCart from '../../assets/shopping-bag.svg';
 import logo from '../../assets/react.svg';
@@ -11,8 +13,10 @@ import CartSide from './CartSide';
 import CardProduct from './CardProduct';
 
 function Home(props) {
+    const navigate = useNavigate();
     const animeIconCart = useRef(null); //ACESSO A ANIMAÇÃO
     const context = useContext(Context);
+    const globalContext = useContext(GlobalContext);
 
     useEffect(() => {
         animeIconCart.current = anime({ // PARA QUE NÃO HAJA O TRAVAMENTO DA ANIMAÇÃO ELA DEVE SER ATRIBUÍDA UMA ÚNICA VEZ.
@@ -29,19 +33,19 @@ function Home(props) {
         <div>
             <Navbar bg="light" data-bs-theme="light" id='navBarHome'>
                 <Container>
-                    <Navbar.Brand href="/"><Image src={logo} alt='logo' /></Navbar.Brand>
+                    <Navbar.Brand href="#" onClick={(e)=>navigate('/')}><Image src={logo} alt='logo'/></Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/" className='linkActive'>Home</Nav.Link>
-                        <Nav.Link href="/carrinho">Carrinho</Nav.Link>
+                        <Nav.Link href="#" onClick={(e)=>navigate('/')} className='linkActive'>Home</Nav.Link>
+                        <Nav.Link href="#" onClick={(e)=>navigate('/carrinho')}>Carrinho</Nav.Link>
                     </Nav>
                     <div className='bttCart' onClick={(e)=>context.setCartSide(true)}>
-                        <Image src={iconCart} alt='iconCart' className='iconCart' />
+                        <Image src={iconCart} alt='iconCart' className='iconCart'/>
                         <div className='qtdeCart'><span>0</span></div>
                     </div>
                 </Container>
             </Navbar>
             <CartSide />
-            <h1>HOME</h1>
+            <h1 onClick={(e)=>globalContext.setName('Nome alterado!')}>HOME - {globalContext.name}</h1>
             <div className='containerProducts'>
                 {Object.entries(context.products).map((el, ind) => {
                     return <CardProduct key={el[0]} animeIconCart={animeIconCart} dataProduct={el[1]} />

@@ -1,20 +1,24 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import { Card, Button, Carousel } from "react-bootstrap";
-import { Context } from "../../services/contextHome";
+import { GlobalContext } from '../../services/contextGlobal';
 import PropTypes from 'prop-types';
+
+const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+})
+
 function CardProduct(props) {
-    const context = useContext(Context);
-    const {setCart} = context;
+    const context = useContext(GlobalContext);
     const { dataProduct } = props;
-    
-    const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
-        style:'currency',
-        currency:'BRL'
-    })
 
     function addCart() {
         let { animeIconCart } = props;
-        setCart(dataProduct);
+        let productToCart = Object.assign({
+            qtde:1,
+            total:dataProduct.price
+        }, dataProduct);
+        context.setCart([...context.cart, dataProduct]);
         animeIconCart.current.restart();
     }
 

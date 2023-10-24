@@ -2,6 +2,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Home from './pages/Home';
 import Carrinho from './pages/Carrinho';
 import ContextHome from './services/contextHome';
+import ContextCarrinho from './services/contextCarrinho';
+import ContextGlobal from './services/contextGlobal';
 
 function App() {
   const browser = createBrowserRouter([
@@ -11,12 +13,12 @@ function App() {
     },
     {
       path:'/carrinho',
-      element:<Carrinho/>
+      element:<ContextCarrinho><Carrinho/></ContextCarrinho>
     }
   ])
 
   return (
-    <RouterProvider router={browser}/>
+    <ContextGlobal><RouterProvider router={browser}/></ContextGlobal>
   )
 }
 
