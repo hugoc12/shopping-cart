@@ -5,28 +5,28 @@
     --blueColor2: #10828C;
 }
 
-#navBarHome{
+#navBarHome {
     background-color: var(--blueColor2) !important;
 }
 
-#navBarHome a{
+#navBarHome a {
     color: var(--blueColor) !important;
 }
 
-#navBarHome a:hover{
+#navBarHome a:hover {
     color: var(--whiteColor) !important;
 }
 
-#navBarHome .linkActive{
+#navBarHome .linkActive {
     color: var(--whiteColor) !important;
 }
 
-img[alt='iconCart']{
+img[alt='iconCart'] {
     width: 28px;
     cursor: pointer;
 }
 
-.bttCart{
+.bttCart {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -34,7 +34,7 @@ img[alt='iconCart']{
     width: 56px;
 }
 
-.qtdeCart{
+.qtdeCart {
     background-color: var(--orangeColor);
     color: var(--whiteColor);
     width: 24px;
@@ -46,7 +46,7 @@ img[alt='iconCart']{
     border-radius: 100%;
 }
 
-.containerProducts{
+.containerProducts {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -55,11 +55,11 @@ img[alt='iconCart']{
 
 }
 
-.cardProduct{
-    margin:10px 0px;
+.cardProduct {
+    margin: 10px 0px;
 }
 
-.itemCartSide{
+.itemCartSide {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -71,12 +71,16 @@ img[alt='iconCart']{
     margin-bottom: 5px;
 }
 
-.itemCartSide img{
+.itemCartSide .trashLogo {
+    width: 20px;
+}
+
+.itemCartSide img {
     width: 120px;
     flex-grow: 1;
 }
 
-.itemCartSide div{
+.itemCartSide div {
     flex-grow: 1;
     padding-left: 5px;
     height: 100%;
@@ -86,7 +90,7 @@ img[alt='iconCart']{
     justify-content: space-between;
 }
 
-.itemCartSide .qtde{
+.itemCartSide .qtde {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -95,12 +99,28 @@ img[alt='iconCart']{
     height: 50px;
 }
 
-.qtde .btt{
+.itemCartSide .bttRemove {
+    align-self: stretch;
+}
+
+.qtde .btt {
     background-color: var(--orangeColor);
     color: var(--whiteColor);
     padding: 5px;
     border-radius: 5px;
     width: 30px;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently*/
 }
 
 .qtde .btt:hover{

@@ -1,7 +1,7 @@
 import { GlobalContext } from '../../services/contextGlobal';
 import { Context } from '../../services/contextHome';
-import { Offcanvas, Image } from 'react-bootstrap';
-import { useContext } from 'react';
+import { Offcanvas, Image, Button } from 'react-bootstrap';
+import { useContext, useEffect } from 'react';
 
 const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -12,8 +12,31 @@ const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
 function CartSide(props) {
     const contextGlobal = useContext(GlobalContext);
     const context = useContext(Context)
-    const { cart } = contextGlobal;
-    const cartList = Object.entries(cart);
+    const cartList = Object.entries(contextGlobal.cart);
+    const totalPedido = cartList.map((el, ind)=>{
+        return el[1].total;
+    }).reduce((acumulador, currentValue)=>acumulador + currentValue, 0);
+
+    useEffect(()=>{
+
+    }, [contextGlobal.cart])
+
+    function defQtde(parameter, id){
+        let cartCopy = Object.assign({}, contextGlobal.cart);
+        let {qtde, total, saldo, price} = cartCopy[id];
+
+        if(parameter === 'remove' && qtde > 1){
+            qtde -= 1;
+        }else if(parameter === 'add' && !(qtde===saldo)){
+            qtde += 1;
+        }
+
+        total = qtde * price;
+        cartCopy[id].qtde = qtde;
+        cartCopy[id].total = total;
+
+        contextGlobal.setCart(cartCopy);
+    }
 
     return (
         <Offcanvas show={context.cartSide} onHide={(e) => context.setCartSide(false)} placement='end'>
@@ -27,19 +50,20 @@ function CartSide(props) {
                             <Image src={el[1].imgs[0]} alt="item" rounded />
                             <div>
                                 <h5>{el[1].name}</h5>
-                                <h6>{CurrencyFormat.format(el[1].price)}</h6>
+                                <h6>{CurrencyFormat.format(el[1].total)}</h6>
                                 <div className='qtde'>
-                                    <span className='btt'>-</span>
-                                    <span>0</span>
-                                    <span className='btt'>+</span>
+                                    <span className='btt' onClick={(e)=>defQtde('remove', el[1].id)}>-</span>
+                                    <span>{el[1].qtde}</span>
+                                    <span className='btt' onClick={(e)=>defQtde('add', el[1].id)}>+</span>
                                 </div>
                             </div>
+                            <Button variant='outline-danger' className='bttRemove'>X</Button>
                         </div>
                     )
                 })}
             </Offcanvas.Body>
             <div className='footer'>
-                <h4>TOTAL: R$690,90</h4>
+                <h4>TOTAL: {CurrencyFormat.format(totalPedido)}</h4>
                 <span>FINALIZAR</span>
             </div>
         </Offcanvas>
