@@ -1,7 +1,7 @@
 import { GlobalContext } from '../../services/contextGlobal';
 import { Context } from '../../services/contextHome';
 import { Offcanvas, Image, Button } from 'react-bootstrap';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 const CurrencyFormat = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -17,10 +17,6 @@ function CartSide(props) {
         return el[1].total;
     }).reduce((acumulador, currentValue)=>acumulador + currentValue, 0);
 
-    useEffect(()=>{
-
-    }, [contextGlobal.cart])
-
     function defQtde(parameter, id){
         let cartCopy = Object.assign({}, contextGlobal.cart);
         let {qtde, total, saldo, price} = cartCopy[id];
@@ -35,6 +31,12 @@ function CartSide(props) {
         cartCopy[id].qtde = qtde;
         cartCopy[id].total = total;
 
+        contextGlobal.setCart(cartCopy);
+    }
+
+    function removeItem(id){
+        let cartCopy = Object.assign({}, contextGlobal.cart);
+        delete cartCopy[id];
         contextGlobal.setCart(cartCopy);
     }
 
@@ -57,7 +59,7 @@ function CartSide(props) {
                                     <span className='btt' onClick={(e)=>defQtde('add', el[1].id)}>+</span>
                                 </div>
                             </div>
-                            <Button variant='outline-danger' className='bttRemove'>X</Button>
+                            <Button variant='outline-danger' className='bttRemove' onClick={(e)=>removeItem(el[1].id)}>X</Button>
                         </div>
                     )
                 })}

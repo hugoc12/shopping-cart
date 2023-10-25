@@ -16,8 +16,10 @@ function CardProduct(props) {
     useEffect(()=>{
         if(Object.prototype.hasOwnProperty.call(context.cart, dataProduct.id)){
             setLockAddCart(true);
+        }else{
+            setLockAddCart(false);
         }
-    }, [])
+    }, [context.cart])
 
     function addCart() {
         let { animeIconCart } = props;
@@ -33,7 +35,6 @@ function CardProduct(props) {
                 writable: true,
                 value: productToCart,
             }) //ADICIONANDO PRODUTO AO CARRINHO
-            console.log(cartCopy);
             context.setCart(cartCopy); //DEFININDO STATE CART
             setLockAddCart(true);
             animeIconCart.current.restart();
