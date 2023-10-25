@@ -57,7 +57,7 @@ function CardProduct(props) {
                 <Card.Text>
                     {CurrencyFormat.format(dataProduct.price)}
                 </Card.Text>
-                <Button variant="primary" onClick={(e) => addCart()} disabled={lockAddCart}>COMPRAR</Button>
+                <Button variant={lockAddCart ? 'success':'primary'} onClick={(e) => addCart()} disabled={lockAddCart}>{lockAddCart ? 'ADDED':'ADD TO CART'}</Button>
             </Card.Body>
         </Card>
     );

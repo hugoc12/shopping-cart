@@ -17,6 +17,7 @@ function Home(props) {
     const animeIconCart = useRef(null); //ACESSO A ANIMAÇÃO
     const context = useContext(Context);
     const globalContext = useContext(GlobalContext);
+    const qtdeCart = Object.entries(globalContext.cart).length;
 
     useEffect(() => {
         animeIconCart.current = anime({ // PARA QUE NÃO HAJA O TRAVAMENTO DA ANIMAÇÃO ELA DEVE SER ATRIBUÍDA UMA ÚNICA VEZ.
@@ -40,7 +41,7 @@ function Home(props) {
                     </Nav>
                     <div className='bttCart' onClick={(e)=>context.setCartSide(true)}>
                         <Image src={iconCart} alt='iconCart' className='iconCart'/>
-                        <div className='qtdeCart'><span>0</span></div>
+                        <div className='qtdeCart'><span>{qtdeCart}</span></div>
                     </div>
                 </Container>
             </Navbar>

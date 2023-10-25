@@ -1,14 +1,24 @@
-import { useContext, useEffect} from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import { Container, Navbar, Nav, Image } from 'react-bootstrap'
-import { Context } from '../../services/contextCarrinho';
 import { GlobalContext } from '../../services/contextGlobal';
+import CardCarrinho from './cardCarrinho';
+
+const NumberFormat = new Intl.NumberFormat('pt-BR', {
+    style:'currency',
+    currency:'BRL'
+})
 
 function Carrinho(props) {
     const navigate = useNavigate();
-    const context = useContext(Context);
     const globalContext = useContext(GlobalContext);
+    const listCart = Object.entries(globalContext.cart);
+    const totalPedido = listCart.map((el, ind)=>{
+        return(
+            el[1].total
+        )
+    }).reduce((acumulador, currentValue)=>acumulador+currentValue, 0)
 
     return (
         <div>
@@ -21,7 +31,13 @@ function Carrinho(props) {
                     </Nav>
                 </Container>
             </Navbar>
-            <h1>CARRINHO - {globalContext.name}</h1>
+            <h1>CARRINHO</h1>
+            <h2 style={{textAlign:'center'}}>TOTAL: {NumberFormat.format(totalPedido)}</h2>
+            {listCart.map((el, ind)=>{
+                return(
+                    <CardCarrinho key={el[0]} dataProduct={el[1]}/>
+                )
+            })}
         </div>
     );
 }

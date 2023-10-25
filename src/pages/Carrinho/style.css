@@ -20,3 +20,88 @@
 #navBarHome .linkActive{
     color: var(--whiteColor) !important;
 }
+
+.cardCarrinho{
+    background-color: var(--blueColor);
+    width: 50%;
+    padding: 5px;
+    margin:10px auto;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    color: var(--whiteColor);
+    font-size: 16px;
+
+    position: relative;
+}
+
+.imgProduto{
+    width: 180px;
+}
+
+.controlQtde{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.bttControlQtde{
+    display: block;
+    padding: 5px;
+    background-color: var(--orangeColor);
+    color: var(--whiteColor);
+    align-self: center;
+    width: 34px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently*/
+}
+
+.bttControlQtde:hover{
+    background-color: var(--blueColor2);
+}
+
+.cardCarrinho h2{
+    text-align: center;
+}
+
+.cardCarrinho div{
+    flex-basis: 280px;
+}
+
+.cardCarrinho h5{
+    flex-basis: 130px;
+}
+
+.deleteLogo{
+    width: 20px;
+    position: absolute;
+    top: 5%;
+    left: 96%;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+.deleteLogo:hover{
+    background-color: #e24949;
+
+}
